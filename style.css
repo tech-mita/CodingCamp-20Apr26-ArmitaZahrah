@@ -1,0 +1,248 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffd6df;
+
+   background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='50' cy='60' rx='20' ry='18' fill='none' stroke='%23ffc2d1' stroke-width='2'/%3E%3Cellipse cx='40' cy='30' rx='6' ry='15' fill='none' stroke='%23ffc2d1' stroke-width='2'/%3E%3Cellipse cx='60' cy='30' rx='6' ry='15' fill='none' stroke='%23ffc2d1' stroke-width='2'/%3E%3Ccircle cx='45' cy='60' r='2' fill='%23ffc2d1'/%3E%3Ccircle cx='55' cy='60' r='2' fill='%23ffc2d1'/%3E%3C/svg%3E");
+    background-size: 80px 80px;
+    background-repeat: repeat;
+    margin: 0;
+    padding: 0;
+}
+
+/* container */
+.container {
+    max-width: 720px; /* 🔥 dari 850 → 720 */
+    margin: 20px auto; /* lebih rapat atas bawah */
+    padding: 10px;
+}
+
+/* card */
+.card {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 25px;
+    padding: 18px; /* dari 25 → 18 */
+    margin-bottom: 18px; /* lebih rapat */
+    box-shadow: 0 10px 30px rgba(255, 105, 135, 0.25);
+    backdrop-filter: blur(12px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* title */
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    color: #ff5c8a;
+}
+
+.card h1,
+.card h2,
+.card h3 {
+    margin: 5px 0; /* 🔥 ini yang bikin rapet */
+    line-height: 1.2;
+}
+
+/* button */
+button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 20px;
+    background: #ff6f91;
+    color: white;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff4d73;
+    transform: scale(1.05);
+}
+
+/* input */
+input {
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    background: #fff;
+    margin-right: 5px;
+}
+
+/* task list */
+ul {
+    padding: 0;
+    margin-top: 15px;
+}
+
+li {
+    list-style: none;
+    background: #ffe4ec;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* link */
+#links a {
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ff6f91, #ff8fab);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+#links a:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #ff4d73, #ff6f91);
+}
+.link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 5px;
+}
+
+.delete-link-btn {
+    background: transparent !important;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.delete-link-btn:hover {
+    transform: scale(1.2);
+}
+
+/* layout 2 kolom */
+.top-cards {
+    display: flex;
+    gap: 20px;
+}
+
+.top-cards .card {
+    flex: 1;
+    min-width: 0; /* biar ga overflow */
+    min-height: 220px; /* dari 260 → 220 */
+}
+
+.label {
+    font-size: 14px;
+    color: #ff8fab;
+    margin-bottom: 4px; /* ✅ lebih dekat ke jam */
+}
+
+/* angka jam & timer */
+#time, #timer {
+    font-size: 48px;
+    color: #d6336c; /* pink tua */
+    text-shadow: 
+        2px 2px 0 #fff,
+        0 0 8px rgba(255, 105, 135, 0.5);
+    margin: 4px 0;
+}
+
+/* greeting */
+#greeting {
+    color: #ff6f91;
+    margin: 6px 0;
+}
+
+/* tombol timer center */
+.timer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+/* font cute tapi clean */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.welcome-user {
+    text-align: center;
+    color: #d6336c;
+
+    margin-bottom: 10px; /* 🔥 kecilin dari 20px */
+    margin-top: 5px;     /* 🔥 biar ga nempel atas tapi tipis */
+
+    font-weight: 600;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.input-group input {
+    flex: 1; /* 🔥 biar panjangnya sama */
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;  /* ✅ rapetin */
+    text-align: center;
+    gap: 6px; /* opsional biar konsisten */
+}
+
+/* bagian atas */
+.card-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.card-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px; /* 🔥 dari 12 → 6 */
+}
+
+.middle-align {
+    position: absolute;
+    left: 58%;
+    transform: translateX(-50%);
+    top: 62%; /* 🔥 ini kunci (atur naik turun di sini) */
+}
+
+.card {
+    padding: 14px; /* dari 18 → 14 */
+}
+
+.task-input-row {
+    display: flex;
+    gap: 12px;
+    width: 100%; /* 🔥 penting */
+}
+
+.task-input-row input {
+    flex: 1;
+    width: 100%; /* 🔥 paksa full */
+}
+
+#date {
+    font-size: 13px;
+    color: #ff8fab;
+    margin-top: -10px; /* 🔥 rapetin ke jam */
+    margin-bottom: 0;
+}

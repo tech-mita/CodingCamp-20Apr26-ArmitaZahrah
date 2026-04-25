@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Life Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container"> <!-- 🔥 TAMBAHAN -->
+<!-- 🔥 GREETING GLOBAL -->
+<h2 id="welcomeUser" class="welcome-user"></h2>
+    <div class="top-cards">
+
+        <!-- CLOCK -->
+<div class="card">
+    <div class="card-top">
+        <h3 class="label">⏰ Current Time</h3>
+        <h1 id="time">00:00</h1>
+        <p id="date"></p>
+    </div>
+
+    <div class="card-bottom">
+        <h2 id="greeting">Good Morning</h2>
+
+        <div class="input-group">
+            <input type="text" id="nameInput" placeholder="Your name...">
+            <button onclick="saveName()">Save</button>
+        </div>
+    </div>
+</div>
+
+        <!-- TIMER -->
+<div class="card">
+    <div class="card-top">
+        <h3 class="label">🎯 Focus Timer</h3>
+        <h1 id="timer">0:00</h1>
+    </div>
+
+    <div class="card-bottom">
+        <div class="timer-buttons">
+            <button onclick="startTimer()">Start</button>
+            <button onclick="stopTimer()">Stop</button>
+            <button onclick="resetTimer()">Reset</button>
+        </div>
+
+        <div class="input-group">
+            <input type="number" id="customTime" placeholder="Minutes">
+            <button onclick="setCustomTime()">Set</button>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+<!-- TASKS -->
+<div class="card">
+    <h2>📝 Tasks</h2>
+
+    <div class="task-input-row"> <!-- 🔥 TAMBAHAN -->
+        <input type="text" id="taskInput" placeholder="what you want to do?">
+        <button onclick="addTask()">➕ Add</button>
+    </div>
+
+    <ul id="taskList"></ul>
+</div>
+
+<!-- LINKS -->
+<div class="card">
+    <h2>🔗 Quick Links</h2>
+
+    <div class="link-input-row"> <!-- 🔥 TAMBAHAN -->
+        <input type="text" id="linkName" placeholder="Name">
+        <input type="text" id="linkURL" placeholder="URL">
+        <button onclick="add()">✨ Add</button>
+    </div>
+
+    <div id="links"></div>
+</div>
+    
+</div> <!-- 🔥 PENUTUP CONTAINER -->
+
+<script src="js/script.js"></script>
+</body>
