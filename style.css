@@ -286,26 +286,22 @@ body.dark button {
     display: flex;
     align-items: center;
     width: 100%;
-
-    background: #ffe4ec;
-    border-radius: 25px;
-    padding: 12px 16px;
-    margin-bottom: 12px;
-
-    overflow: hidden;
 }
 
+/* teks kiri */
 #taskList li span {
     flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
+/* tombol kanan */
 .task-actions {
     display: flex;
     gap: 6px;
-    margin-left: auto;
-    flex-shrink: 0;
+    margin-left: auto; /* 🔥 INI YANG NGEDORONG KE KANAN */
+}
+
+/* tombol */
+.task-actions button {
+    padding: 5px 8px;
+    border-radius: 10px;
 }
