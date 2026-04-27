@@ -305,6 +305,7 @@ li span {
     display: flex;
     gap: 6px;        /* jarak antar tombol */
     margin-left: auto; /* dorong ke kanan */
+    flex-shrink: 0;
 }
 
 /* biar tombol kecil & rapet */
@@ -322,12 +323,13 @@ li span {
     border-radius: 25px;       /* 🔥 lebih bulat */
     padding: 12px 16px;        /* 🔥 lebih lega */
     margin-bottom: 12px;       /* 🔥 jarak antar task */
-
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* optional biar soft */
+    overflow: hidden;
 }
 
 #taskList li span {
     flex: 1;
-    text-align: left;   /* 🔥 paksa ke kiri */
-    padding-left: 4px;  /* sedikit nafas */
+    min-width: 0; /* 🔥 penting banget */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
