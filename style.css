@@ -265,22 +265,27 @@ body {
     margin-top: 6px;
 }
 
-/* 🔥 FINAL TOUCH DARK MODE */
-
-body.dark #time,
-body.dark #timer {
-    color: #ff8fab; /* pink soft, bukan neon */
-    text-shadow: none; /* biar ga silau */
+/* ===== DARK MODE BASE (WAJIB) ===== */
+body.dark {
+    background: #1e1e2f;
+    background-image: none;
+    color: white;
 }
 
-body.dark .label {
-    color: #bbb;
+body.dark .card {
+    background: #2a2a40;
 }
 
-body.dark #greeting {
-    color: #ff8fab;
+body.dark li {
+    background: #3a3a55;
 }
 
-body.dark #helloText {
-    color: #ff8fab;
+body.dark input {
+    background: #3a3a55;
+    color: white;
+}
+
+body.dark button {
+    background: #444;
+    color: white;
 }
