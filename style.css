@@ -83,6 +83,41 @@ ul {
     padding-left: 20px;
 }
 
-h1, h2, h3, p {
+/* HEADER */
+#helloText {
+    font-size: 48px;
+    font-weight: 700;
     color: #ff5c8a;
+    margin: 0;
+}
+
+.subheading {
+    font-size: 18px;
+    color: #ff8eb3;
+    margin: 2px 0 0 0;
+}
+
+/* TITLE CARD */
+.card h3 {
+    color: #ff5c8a;
+}
+
+/* GREETING */
+#greeting {
+    color: #ff5c8a;
+    font-weight: 600;
+}
+
+/* TIME */
+#time {
+    color: #ff5c8a;
+}
+
+/* TASK & LINK TITLE */
+.card h2 {
+    color: #ff5c8a;
+}
+
+.card {
+    background: #fff5f8;
 }
