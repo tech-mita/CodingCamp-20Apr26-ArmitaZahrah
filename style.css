@@ -312,3 +312,22 @@ li span {
     padding: 4px 6px;
     font-size: 12px;
 }
+
+#taskList li {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    background: #ffe4ec;
+    border-radius: 25px;       /* 🔥 lebih bulat */
+    padding: 12px 16px;        /* 🔥 lebih lega */
+    margin-bottom: 12px;       /* 🔥 jarak antar task */
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* optional biar soft */
+}
+
+#taskList li span {
+    flex: 1;
+    text-align: left;   /* 🔥 paksa ke kiri */
+    padding-left: 4px;  /* sedikit nafas */
+}
