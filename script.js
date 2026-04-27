@@ -1,26 +1,29 @@
 // ===== USER NAME =====
 function saveName() {
     const input = document.getElementById("nameInput");
-    if (!input) return;
     const name = input.value.trim();
     if (!name) return;
     localStorage.setItem("username", name);
-    const hello = document.getElementById("helloText");
-    if (hello) {
-        hello.innerText = `Hello, ${name}!`;
-    }
 
+    // update hello
+    document.getElementById("helloText").innerText = `Hello, ${name}!`;
+    // munculkan subheading
+    document.getElementById("subText").style.display = "block";
+    // reset input
     input.value = "";
 }
 
 function loadUserName() {
     const name = localStorage.getItem("username");
     const hello = document.getElementById("helloText");
-    if (!hello) return;
+    const sub = document.getElementById("subText");
+    if (!hello || !sub) return;
     if (name) {
         hello.innerText = `Hello, ${name}!`;
+        sub.style.display = "block";
     } else {
         hello.innerText = "Hello, please input your name!";
+        sub.style.display = "none";
     }
 }
 
