@@ -68,10 +68,8 @@ function addTask() {
 
     // CEK DUPLIKAT
     const isDuplicate = tasks.some(t => normalize(t.text) === text);
-
     if (isDuplicate) {
-        input.style.border = "2px solid red";
-        setTimeout(() => input.style.border = "", 1000);
+        alert("Task sudah ada, tidak bisa ditambahkan lagi!");
         input.value = "";
         return;
     }
