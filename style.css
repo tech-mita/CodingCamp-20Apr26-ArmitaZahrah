@@ -14,28 +14,29 @@ body {
 /* HEADER */
 .header {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 #helloText {
-    font-size: 48px; 
+    font-size: 44px;
     font-weight: 700;
     color: #ff5c8a;
     margin: 0;
 }
 
 .subheading {
-    font-size: 18px; 
+    font-size: 16px;
     color: #ff8eb3;
-    margin: 2px 0 0 0; 
+    margin-top: 4px;
 }
+
 /* CARD */
 .card {
-    background: white;
+    background: #fff5f8; /* 🔥 lebih soft */
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 18px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 20px rgba(255, 105, 150, 0.15);
 }
 
 /* TOP CARDS */
@@ -49,56 +50,14 @@ body {
     flex: 1;
 }
 
-/* INPUT GROUP */
-.input-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-/* BUTTON */
-button {
-    background: #ff8eb3;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: white;
-}
-
-button:hover {
-    background: #ff6f9f;
-}
-
-/* TASK INPUT */
-.task-input-row,
-.link-input-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-/* LIST */
-ul {
-    padding-left: 20px;
-}
-
-/* HEADER */
-#helloText {
-    font-size: 48px;
-    font-weight: 700;
-    color: #ff5c8a;
-    margin: 0;
-}
-
-.subheading {
-    font-size: 18px;
-    color: #ff8eb3;
-    margin: 2px 0 0 0;
-}
-
-/* TITLE CARD */
+/* TITLE */
+.card h2,
 .card h3 {
+    color: #ff5c8a;
+}
+
+/* TIME */
+#time {
     color: #ff5c8a;
 }
 
@@ -108,16 +67,39 @@ ul {
     font-weight: 600;
 }
 
-/* TIME */
-#time {
-    color: #ff5c8a;
+/* INPUT */
+input {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    background: #ffeaf2;
+    outline: none;
 }
 
-/* TASK & LINK TITLE */
-.card h2 {
-    color: #ff5c8a;
+/* INPUT GROUP */
+.input-group,
+.task-input-row,
+.link-input-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-.card {
-    background: #fff5f8;
+/* BUTTON */
+button {
+    background: #ff8eb3;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff6f9f;
+}
+
+/* LIST */
+ul {
+    padding-left: 15px;
 }
