@@ -264,3 +264,21 @@ body {
     color: #ff8eb3;
     margin-top: 6px;
 }
+
+.dark {
+    background: #1e1e2f;
+    color: white;
+}
+
+.dark .card {
+    background: #2a2a40;
+}
+
+.dark input {
+    background: #3a3a55;
+    color: white;
+}
+
+.dark button {
+    background: #ff6f9f;
+}
