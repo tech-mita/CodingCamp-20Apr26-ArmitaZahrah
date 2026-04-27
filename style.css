@@ -122,6 +122,7 @@ input {
 #taskList li {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* 🔥 FIX POSISI */
     gap: 10px;
 
     width: 100%;
@@ -133,15 +134,17 @@ input {
     margin-bottom: 12px;
 }
 
-/* 🔥 FIX EMOJI FONT */
+/* 🔥 FIX EMOJI */
 #taskList li span {
     flex: 1;
     text-align: left;
     font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
 }
 
+/* 🔥 FIX CENTER BUTTON */
 .task-actions {
     display: flex;
+    align-items: center; /* 🔥 INI KUNCI */
     gap: 6px;
 }
 
@@ -149,6 +152,9 @@ input {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ================= QUICK LINKS ================= */
@@ -182,6 +188,7 @@ input {
 .link-actions {
     display: flex;
     justify-content: center;
+    align-items: center; /* 🔥 FIX */
     gap: 10px;
 }
 
@@ -222,7 +229,7 @@ body.dark #taskList li {
 }
 
 body.dark #taskList li span {
-    color: #f1f1f1; /* 🔥 FIX EMOJI */
+    color: #f1f1f1; /* 🔥 emoji aman */
 }
 
 /* LINKS */
