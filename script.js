@@ -14,17 +14,13 @@ function saveName() {
 }
 
 function loadUserName() {
-    const name = localStorage.getItem("username");
     const hello = document.getElementById("helloText");
     const sub = document.getElementById("subText");
     if (!hello || !sub) return;
-    if (name) {
-        hello.innerText = `Hello, ${name}!`;
-        sub.style.display = "block";
-    } else {
-        hello.innerText = "Hello, please input your name!";
-        sub.style.display = "none";
-    }
+    
+    // ❗ SELALU RESET KE DEFAULT
+    hello.innerText = "Hello, please input your name!";
+    sub.style.display = "none";
 }
 
 // ===== TIME & GREETING =====
