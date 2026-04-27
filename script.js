@@ -193,9 +193,8 @@ function showEditInput(li, index) {
         const isDuplicate = tasks.some((t, i) =>
             i !== index && normalize(t.text) === newText
         );
-
         if (isDuplicate) {
-            input.style.border = "2px solid red";
+            alert("Task sudah ada, tidak bisa disimpan!");
             return;
         }
 
