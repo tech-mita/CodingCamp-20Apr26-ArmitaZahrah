@@ -155,7 +155,7 @@ function showEditInput(li, index) {
 
 
 // ===== TIMER =====
-let timer = 0;
+let timer = 25 * 60;
 let interval = null;
 
 function updateTimerDisplay() {
@@ -188,7 +188,7 @@ function stopTimer() {
 function resetTimer() {
     clearInterval(interval);
     interval = null;
-    timer = 0;
+    timer = 25 * 60;
     updateTimerDisplay();
 }
 
