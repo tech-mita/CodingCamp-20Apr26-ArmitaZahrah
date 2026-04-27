@@ -119,37 +119,18 @@ function renderTasks() {
         span.onclick = () => toggleTask(index);
 
         // EDIT BUTTON
-       const editBtn = document.createElement("button");
-        editBtn.innerText = "✏️";
-        editBtn.onclick = () => showEditInput(li, index);
+const editBtn = document.createElement("button");
+editBtn.innerText = "✏️";
+editBtn.onclick = () => showEditInput(li, index);
 
-        // DELETE BUTTON
-function showEditInput(li, index) {
-    li.innerHTML = ""; // kosongkan isi lama
+const deleteBtn = document.createElement("button");
+deleteBtn.innerText = "❌";
+deleteBtn.onclick = () => deleteTask(index);
 
-    const input = document.createElement("input");
-    input.value = tasks[index].text;
-    input.className = "edit-input";
-
-    const saveBtn = document.createElement("button");
-    saveBtn.innerText = "💾";
-    saveBtn.onclick = () => {
-        const newText = input.value.trim();
-        if (!newText) return;
-
-        tasks[index].text = newText;
-        saveTasks();
-        renderTasks();
-    };
-
-    const cancelBtn = document.createElement("button");
-    cancelBtn.innerText = "❌";
-    cancelBtn.onclick = () => renderTasks();
-
-    li.appendChild(input);
-    li.appendChild(saveBtn);
-    li.appendChild(cancelBtn);
-}
+// append
+li.appendChild(span);
+li.appendChild(editBtn);
+li.appendChild(deleteBtn);
 
 function editTask(index) {
     const newText = prompt("Edit task:", tasks[index].text);
