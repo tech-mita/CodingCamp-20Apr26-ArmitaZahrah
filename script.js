@@ -263,7 +263,7 @@ function setCustomTime() {
     input.value = "";
 }
 
-// ===== LINKS =====
+// ===== LINKS (UPDATED FINAL) =====
 let links = JSON.parse(localStorage.getItem("links")) || [];
 
 function saveLinks() {
@@ -284,12 +284,14 @@ function addLink() {
     document.getElementById("linkURL").value = "";
 }
 
+// DELETE
 function deleteLink(index) {
     links.splice(index, 1);
     saveLinks();
     renderLinks();
 }
 
+// 🔥 RENDER (SUDAH ADA EDIT + LAYOUT BAWAH)
 function renderLinks() {
     const container = document.getElementById("linkList");
     container.innerHTML = "";
@@ -297,18 +299,62 @@ function renderLinks() {
     links.forEach((link, index) => {
         const li = document.createElement("li");
 
+        // LINK TEXT
         const a = document.createElement("a");
         a.href = link.url;
         a.innerText = "💖 " + link.name;
         a.target = "_blank";
 
-        const btn = document.createElement("button");
-        btn.innerText = "❌";
-        btn.onclick = () => deleteLink(index);
+        // ACTION BUTTON (DI BAWAH)
+        const actions = document.createElement("div");
+        actions.className = "link-actions";
 
-        li.append(a, btn);
+        // ✏️ EDIT
+        const edit = document.createElement("button");
+        edit.innerText = "✏️";
+        edit.onclick = () => showEditLink(li, index);
+
+        // ❌ DELETE
+        const del = document.createElement("button");
+        del.innerText = "❌";
+        del.onclick = () => deleteLink(index);
+
+        actions.append(edit, del);
+
+        li.append(a, actions);
         container.appendChild(li);
     });
+}
+
+// 🔥 EDIT FUNCTION
+function showEditLink(li, index) {
+    li.innerHTML = "";
+
+    const nameInput = document.createElement("input");
+    nameInput.value = links[index].name;
+
+    const urlInput = document.createElement("input");
+    urlInput.value = links[index].url;
+
+    const save = document.createElement("button");
+    save.innerText = "💾";
+
+    save.onclick = () => {
+        const name = nameInput.value.trim();
+        const url = urlInput.value.trim();
+
+        if (!name || !url) return;
+
+        links[index] = { name, url };
+        saveLinks();
+        renderLinks();
+    };
+
+    const cancel = document.createElement("button");
+    cancel.innerText = "❌";
+    cancel.onclick = () => renderLinks();
+
+    li.append(nameInput, urlInput, save, cancel);
 }
 
 // ===== DARK MODE =====
