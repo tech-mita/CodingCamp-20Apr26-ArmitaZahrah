@@ -190,6 +190,7 @@ body {
     justify-content: flex-start;  /* ✅ rapetin */
     text-align: center;
     gap: 6px; /* opsional biar konsisten */
+    overflow: hidden;
 }
 
 /* bagian atas */
@@ -218,10 +219,12 @@ body {
     padding: 14px; /* dari 18 → 14 */
 }
 
-.task-input-row {
-    display: flex;
-    gap: 12px;
-    width: 100%; /* 🔥 penting */
+.task-input-row,
+#taskList li {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 .task-input-row input {
@@ -301,6 +304,7 @@ body.dark button {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: left;
 }
 
 .task-actions {
