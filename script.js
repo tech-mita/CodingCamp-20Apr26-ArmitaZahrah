@@ -321,21 +321,21 @@ function renderLinks() {
     });
 }
 
-// ===== DARK MODE =====
+// ===== DARK / LIGHT TOGGLE =====
 function loadTheme() {
     const saved = localStorage.getItem("theme");
 
-    if (saved === "dark") {
-        document.body.classList.add("dark");
-        const btn = document.getElementById("themeToggle");
-        if (btn) btn.innerText = "☀️";
-    }
+    const isDark = saved === "dark";
+    document.body.classList.toggle("dark", isDark);
+
+    const btn = document.getElementById("themeToggle");
+    if (btn) btn.innerText = isDark ? "☀️" : "🌙";
 }
 
 function toggleTheme() {
-    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.toggle("dark");
 
-    const isDark = document.body.classList.contains("dark");
+    // simpan state TERKINI (bisa "dark" atau "light")
     localStorage.setItem("theme", isDark ? "dark" : "light");
 
     const btn = document.getElementById("themeToggle");
@@ -344,10 +344,15 @@ function toggleTheme() {
 
 // ===== INIT =====
 document.addEventListener("DOMContentLoaded", function () {
+    // semua init di sini
     loadUserName();
     updateTime();
     renderTasks();
     renderLinks();
     updateTimerDisplay();
     loadTheme();
+
+    // tombol dark mode
+    const btn = document.getElementById("themeToggle");
+    if (btn) btn.addEventListener("click", toggleTheme);
 });
