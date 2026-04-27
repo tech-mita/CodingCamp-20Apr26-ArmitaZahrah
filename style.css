@@ -289,29 +289,8 @@ body.dark button {
     background: #444;
     color: white;
 }
-
-li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-li span {
-    flex: 1;
-}
-
-/* 🔥 INI KUNCI */
-.task-actions {
-    display: flex;
-    gap: 6px;        /* jarak antar tombol */
-    margin-left: auto; /* dorong ke kanan */
-    flex-shrink: 0;
-}
-
-/* biar tombol kecil & rapet */
-.task-actions button {
-    padding: 4px 6px;
-    font-size: 12px;
+#taskList {
+    padding: 0;
 }
 
 #taskList li {
@@ -320,16 +299,24 @@ li span {
     width: 100%;
 
     background: #ffe4ec;
-    border-radius: 25px;       /* 🔥 lebih bulat */
-    padding: 12px 16px;        /* 🔥 lebih lega */
-    margin-bottom: 12px;       /* 🔥 jarak antar task */
+    border-radius: 25px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+
     overflow: hidden;
 }
 
 #taskList li span {
     flex: 1;
-    min-width: 0; /* 🔥 penting banget */
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.task-actions {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+    flex-shrink: 0;
 }
