@@ -87,6 +87,8 @@ function getEmoji(task) {
     const text = task.toLowerCase();
 
     if (text.includes("makan")) return "🍽️";
+    if (text.includes("masak")) return "🍳";
+    if (text.includes("minum")) return "🍹";
     if (text.includes("tidur")) return "😴";
     if (text.includes("belajar")) return "📚";
     if (text.includes("kerja")) return "💻";
@@ -117,21 +119,36 @@ function renderTasks() {
         span.onclick = () => toggleTask(index);
 
         // EDIT BUTTON
-        const editBtn = document.createElement("button");
+       const editBtn = document.createElement("button");
         editBtn.innerText = "✏️";
-        editBtn.onclick = () => editTask(index);
+        editBtn.onclick = () => showEditInput(li, index);
 
         // DELETE BUTTON
-        const delBtn = document.createElement("button");
-        delBtn.innerText = "❌";
-        delBtn.onclick = () => deleteTask(index);
+function showEditInput(li, index) {
+    li.innerHTML = ""; // kosongkan isi lama
 
-        li.appendChild(span);
-        li.appendChild(editBtn);
-        li.appendChild(delBtn);
+    const input = document.createElement("input");
+    input.value = tasks[index].text;
+    input.className = "edit-input";
 
-        list.appendChild(li);
-    });
+    const saveBtn = document.createElement("button");
+    saveBtn.innerText = "💾";
+    saveBtn.onclick = () => {
+        const newText = input.value.trim();
+        if (!newText) return;
+
+        tasks[index].text = newText;
+        saveTasks();
+        renderTasks();
+    };
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.innerText = "❌";
+    cancelBtn.onclick = () => renderTasks();
+
+    li.appendChild(input);
+    li.appendChild(saveBtn);
+    li.appendChild(cancelBtn);
 }
 
 function editTask(index) {
