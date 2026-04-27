@@ -1,4 +1,8 @@
 body {
+    background: red;
+}
+
+body {
     font-family: 'Poppins', sans-serif;
     background: #f8c8d8;
     margin: 0;
