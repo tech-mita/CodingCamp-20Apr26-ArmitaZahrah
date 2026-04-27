@@ -1,11 +1,38 @@
+// ===== USER NAME =====
+function saveName() {
+    const input = document.getElementById("nameInput");
+    const name = input.value.trim();
+
+    if (!name) return;
+
+    localStorage.setItem("username", name);
+
+    document.getElementById("helloText").innerText = `Hello, ${name}!`;
+
+    input.value = "";
+}
+
+function loadUserName() {
+    const name = localStorage.getItem("username");
+    const hello = document.getElementById("helloText");
+
+    if (!hello) return;
+
+    if (name) {
+        hello.innerText = `Hello, ${name}!`;
+    } else {
+        hello.innerText = "Hello, please input your name!";
+    }
+}
+
+// ===== TIME & GREETING =====
 function updateTime() {
     const now = new Date();
 
     // JAM
-    const time = now.toLocaleTimeString();
-    document.getElementById("time").innerText = time;
+    document.getElementById("time").innerText = now.toLocaleTimeString();
 
-    // GREETING
+    // GREETING + EMOJI
     let hour = now.getHours();
     let greeting = "";
 
@@ -15,7 +42,7 @@ function updateTime() {
 
     document.getElementById("greeting").innerText = greeting;
 
-    // 🔥 TANGGAL (PINDAH KE SINI)
+    // TANGGAL
     const options = { 
         weekday: 'long', 
         year: 'numeric', 
@@ -27,8 +54,11 @@ function updateTime() {
     document.getElementById("date").innerText = dateString;
 }
 
+// update tiap detik
 setInterval(updateTime, 1000);
 
+
+// ===== TASK =====
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 function saveTasks() {
@@ -36,12 +66,12 @@ function saveTasks() {
 }
 
 function addTask() {
-    let input = document.getElementById("taskInput");
-    let text = input.value;
+    const input = document.getElementById("taskInput");
+    const text = input.value.trim();
 
-    if (text === "") return;
+    if (!text) return;
 
-    tasks.push({ text: text, done: false });
+    tasks.push({ text, done: false });
     input.value = "";
 
     saveTasks();
@@ -61,20 +91,13 @@ function deleteTask(index) {
 }
 
 function renderTasks() {
-    let list = document.getElementById("taskList");
-
-    if (!list) {
-        list = document.createElement("ul");
-        list.id = "taskList";
-        document.body.appendChild(list);
-    }
-
+    const list = document.getElementById("taskList");
     list.innerHTML = "";
 
     tasks.forEach((task, index) => {
-        let li = document.createElement("li");
+        const li = document.createElement("li");
 
-        let span = document.createElement("span");
+        const span = document.createElement("span");
         span.innerText = task.text;
 
         if (task.done) {
@@ -83,21 +106,21 @@ function renderTasks() {
 
         span.onclick = () => toggleTask(index);
 
-        let btn = document.createElement("button");
-        btn.innerText = "Delete";
+        const btn = document.createElement("button");
+        btn.innerText = "❌";
         btn.onclick = () => deleteTask(index);
 
         li.appendChild(span);
         li.appendChild(btn);
+
         list.appendChild(li);
     });
 }
 
-renderTasks();
 
-let timer = 0; // 0 menit
-let interval;
-  updateTimerDisplay();
+// ===== TIMER (COUNTDOWN) =====
+let timer = 0;
+let interval = null;
 
 function updateTimerDisplay() {
     let minutes = Math.floor(timer / 60);
@@ -108,12 +131,15 @@ function updateTimerDisplay() {
 }
 
 function startTimer() {
-    if (interval) return;
+    if (interval || timer <= 0) return;
 
     interval = setInterval(() => {
         if (timer > 0) {
             timer--;
             updateTimerDisplay();
+        } else {
+            clearInterval(interval);
+            interval = null;
         }
     }, 1000);
 }
@@ -126,99 +152,15 @@ function stopTimer() {
 function resetTimer() {
     clearInterval(interval);
     interval = null;
-    timer = 1500;
+    timer = 0;
     updateTimerDisplay();
 }
 
-let links = JSON.parse(localStorage.getItem("links")) || [];
-
-function saveLinks() {
-    localStorage.setItem("links", JSON.stringify(links));
-}
-
-function addLink() {
-    let name = document.getElementById("linkName").value;
-    let url = document.getElementById("linkURL").value;
-
-    if (name === "" || url === "") return;
-
-    links.push({ name, url });
-
-    saveLinks();
-    renderLinks();
-}
-
-function renderLinks() {
-    let container = document.getElementById("links");
-    container.innerHTML = "";
-
-    links.forEach((link, index) => {
-        let a = document.createElement("a");
-        a.href = link.url;
-        a.innerText = "💖 " + link.name;
-        a.target = "_blank";
-        a.classList.add("link-btn");
-
-        let delBtn = document.createElement("❌");
-        delBtn.innerText = "❌";
-        delBtn.classList.add("delete-link-btn");
-        delBtn.onclick = () => deleteLink(index);
-
-        let wrapper = document.createElement("div");
-        wrapper.classList.add("link-item");
-
-        wrapper.appendChild(a);
-        wrapper.appendChild(delBtn);
-
-        container.appendChild(wrapper);
-    });
-}
-
-renderLinks();
-function deleteLink(index) {
-    links.splice(index, 1);
-    saveLinks();
-    renderLinks();
-}
-
-function saveName() {
-    let input = document.getElementById("username");
-    let name = input.value;
-
-    if (name === "") return;
-
-    localStorage.setItem("username", name);
-    showName();
-
-    input.value = ""; // 🔥 INI KUNCINYA (reset ke kosong)
-}
-
-function showName() {
-    let name = localStorage.getItem("username");
-
-    if (name) {
-        document.getElementById("welcomeUser").innerText =
-            "Hello, " + name + " ✨";
-
-        // 🔥 sembunyikan input
-        document.getElementById("nameSection").style.display = "none";
-    }
-}
-
-function editName() {
-    document.getElementById("nameSection").style.display = "block";
-}
-
-showName();
-
 function setCustomTime() {
-    let input = document.getElementById("customTime");
-    let minutes = parseInt(input.value);
+    const input = document.getElementById("customTime");
+    const minutes = parseInt(input.value);
 
     if (!minutes || minutes <= 0) return;
-
-    clearInterval(interval);
-    interval = null;
 
     timer = minutes * 60;
     updateTimerDisplay();
@@ -226,11 +168,64 @@ function setCustomTime() {
     input.value = "";
 }
 
-function updateTimerDisplay() {
-    let minutes = Math.floor(timer / 60);
-    let seconds = timer % 60;
 
-    document.getElementById("timer").innerText =
-        `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+// ===== LINKS =====
+let links = JSON.parse(localStorage.getItem("links")) || [];
+
+function saveLinks() {
+    localStorage.setItem("links", JSON.stringify(links));
 }
 
+function addLink() {
+    const name = document.getElementById("linkName").value.trim();
+    const url = document.getElementById("linkURL").value.trim();
+
+    if (!name || !url) return;
+
+    links.push({ name, url });
+
+    saveLinks();
+    renderLinks();
+
+    document.getElementById("linkName").value = "";
+    document.getElementById("linkURL").value = "";
+}
+
+function deleteLink(index) {
+    links.splice(index, 1);
+    saveLinks();
+    renderLinks();
+}
+
+function renderLinks() {
+    const container = document.getElementById("linkList");
+    container.innerHTML = "";
+
+    links.forEach((link, index) => {
+        const li = document.createElement("li");
+
+        const a = document.createElement("a");
+        a.href = link.url;
+        a.innerText = "💖 " + link.name;
+        a.target = "_blank";
+
+        const btn = document.createElement("button");
+        btn.innerText = "❌";
+        btn.onclick = () => deleteLink(index);
+
+        li.appendChild(a);
+        li.appendChild(btn);
+
+        container.appendChild(li);
+    });
+}
+
+
+// ===== INIT =====
+document.addEventListener("DOMContentLoaded", function () {
+    loadUserName();
+    updateTime();
+    renderTasks();
+    renderLinks();
+    updateTimerDisplay();
+});
