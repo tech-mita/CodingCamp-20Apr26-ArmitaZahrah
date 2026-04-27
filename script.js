@@ -1,13 +1,18 @@
 // ===== USER NAME =====
 function saveName() {
     const name = document.getElementById("nameInput").value;
+    if (name.trim() === "") return;
     localStorage.setItem("username", name);
-    loadUserName();
+
+    // langsung update teks
+    document.getElementById("helloText").innerText = `Hello, ${name}!`;
 }
 
 function loadUserName() {
-    const name = localStorage.getItem("username") || "User";
-    document.getElementById("helloText").innerText = `Hello, ${name}`;
+    const name = localStorage.getItem("username");
+    if (name) {
+        document.getElementById("helloText").innerText = `Hello, ${name}!`;
+    }
 }
 
 // ===== TIME =====
