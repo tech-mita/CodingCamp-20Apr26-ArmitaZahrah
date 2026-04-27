@@ -278,6 +278,30 @@ body.dark button {
     background: #444;
     color: white;
 }
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+li span {
+    flex: 1;
+}
+
+/* 🔥 INI KUNCI */
+.task-actions {
+    display: flex;
+    gap: 6px;        /* jarak antar tombol */
+    margin-left: auto; /* dorong ke kanan */
+}
+
+/* biar tombol kecil & rapet */
+.task-actions button {
+    padding: 4px 6px;
+    font-size: 12px;
+}
+
 #taskList {
     padding: 0;
 }
