@@ -1,13 +1,14 @@
 // ===== USER NAME =====
 function saveName() {
     const input = document.getElementById("nameInput");
+    if (!input) return;
     const name = input.value.trim();
-
     if (!name) return;
-
     localStorage.setItem("username", name);
-
-    document.getElementById("helloText").innerText = `Hello, ${name}!`;
+    const hello = document.getElementById("helloText");
+    if (hello) {
+        hello.innerText = `Hello, ${name}!`;
+    }
 
     input.value = "";
 }
@@ -15,9 +16,7 @@ function saveName() {
 function loadUserName() {
     const name = localStorage.getItem("username");
     const hello = document.getElementById("helloText");
-
     if (!hello) return;
-
     if (name) {
         hello.innerText = `Hello, ${name}!`;
     } else {
