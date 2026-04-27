@@ -155,9 +155,11 @@ function showEditInput(li, index) {
 
 
 // ===== TIMER =====
-let timer = 25 * 60;
+let DEFAULT_TIME = 25 * 60; 
+let timer = DEFAULT_TIME;
 let interval = null;
 
+// ===== DISPLAY =====
 function updateTimerDisplay() {
     let m = Math.floor(timer / 60);
     let s = timer % 60;
@@ -166,8 +168,9 @@ function updateTimerDisplay() {
         `${m}:${s < 10 ? "0" : ""}${s}`;
 }
 
+// ===== START =====
 function startTimer() {
-    if (interval || timer <= 0) return;
+    if (interval) return;
 
     interval = setInterval(() => {
         if (timer > 0) {
@@ -180,6 +183,7 @@ function startTimer() {
     }, 1000);
 }
 
+// ===== STOP =====
 function stopTimer() {
     clearInterval(interval);
     interval = null;
@@ -188,10 +192,12 @@ function stopTimer() {
 function resetTimer() {
     clearInterval(interval);
     interval = null;
-    timer = 25 * 60;
+
+    timer = DEFAULT_TIME; 
     updateTimerDisplay();
 }
 
+// ===== SET CUSTOM =====
 function setCustomTime() {
     const input = document.getElementById("customTime");
     const minutes = parseInt(input.value);
@@ -204,6 +210,10 @@ function setCustomTime() {
     input.value = "";
 }
 
+// ===== INIT =====
+document.addEventListener("DOMContentLoaded", function () {
+    updateTimerDisplay();
+});
 
 // ===== LINKS =====
 let links = JSON.parse(localStorage.getItem("links")) || [];
