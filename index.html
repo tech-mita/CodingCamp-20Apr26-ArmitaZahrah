@@ -8,11 +8,13 @@
 </head>
 <body>
 
-<div class="container"> <!-- 🔥 TAMBAHAN -->
-<!-- 🔥 GREETING GLOBAL -->
-<h2 id="welcomeUser" class="welcome-user"></h2>
-    <div class="top-cards">
-
+<div class="container"> 
+<!-- HEADER -->
+<div class="header">
+    <h1 id="helloText">Hello, please input your name!</h1>
+    <p class="subheading">Welcome to your Personal Flow</p>
+</div>
+<div class="top-cards">
         <!-- CLOCK -->
 <div class="card">
     <div class="card-top">
@@ -31,7 +33,7 @@
     </div>
 </div>
 
-        <!-- TIMER -->
+<!-- TIMER -->
 <div class="card">
     <div class="card-top">
         <h3 class="label">🎯 Focus Timer</h3>
@@ -75,11 +77,11 @@
         <input type="text" id="linkURL" placeholder="URL">
         <button onclick="addLink()">✨ Add</button>
     </div>
-
-    <div id="links"></div>
+    <ul id="linkList"></ul>
 </div>
     
 </div> <!-- 🔥 PENUTUP CONTAINER -->
 
 <script src="script.js"></script>
 </body>
+</html>
