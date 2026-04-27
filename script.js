@@ -53,26 +53,60 @@ function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+// ===== ADD TASK =====
 function addTask() {
     const input = document.getElementById("taskInput");
     const text = input.value.trim();
+
     if (!text) return;
 
-    tasks.push({ text, done: false });
+    // ❗ CEK DUPLIKAT
+    const isDuplicate = tasks.some(
+        task => task.text.toLowerCase() === text.toLowerCase()
+    );
+
+    if (isDuplicate) {
+        alert("Task sudah ada!");
+        input.value = "";
+        return;
+    }
+
+    tasks.push({ text: text, done: false });
     input.value = "";
 
     saveTasks();
     renderTasks();
 }
 
+// ===== TOGGLE DONE =====
 function toggleTask(index) {
     tasks[index].done = !tasks[index].done;
     saveTasks();
     renderTasks();
 }
 
+// ===== DELETE =====
 function deleteTask(index) {
     tasks.splice(index, 1);
+    saveTasks();
+    renderTasks();
+}
+
+// ===== MOVE ORDER =====
+function moveTaskUp(index) {
+    if (index === 0) return;
+
+    [tasks[index - 1], tasks[index]] = [tasks[index], tasks[index - 1]];
+
+    saveTasks();
+    renderTasks();
+}
+
+function moveTaskDown(index) {
+    if (index === tasks.length - 1) return;
+
+    [tasks[index + 1], tasks[index]] = [tasks[index], tasks[index + 1]];
+
     saveTasks();
     renderTasks();
 }
@@ -94,7 +128,7 @@ function getEmoji(text) {
     return "✨";
 }
 
-// ===== RENDER TASK =====
+// ===== RENDER =====
 function renderTasks() {
     const list = document.getElementById("taskList");
     list.innerHTML = "";
@@ -102,22 +136,39 @@ function renderTasks() {
     tasks.forEach((task, index) => {
         const li = document.createElement("li");
 
+        // TEXT
         const span = document.createElement("span");
         span.innerText = `${getEmoji(task.text)} ${task.text}`;
 
-        if (task.done) span.style.textDecoration = "line-through";
+        if (task.done) {
+            span.style.textDecoration = "line-through";
+        }
 
         span.onclick = () => toggleTask(index);
 
+        // MOVE BUTTONS
+        const upBtn = document.createElement("button");
+        upBtn.innerText = "⬆️";
+        upBtn.onclick = () => moveTaskUp(index);
+
+        const downBtn = document.createElement("button");
+        downBtn.innerText = "⬇️";
+        downBtn.onclick = () => moveTaskDown(index);
+
+        // EDIT BUTTON
         const editBtn = document.createElement("button");
         editBtn.innerText = "✏️";
         editBtn.onclick = () => showEditInput(li, index);
 
+        // DELETE BUTTON
         const delBtn = document.createElement("button");
         delBtn.innerText = "❌";
         delBtn.onclick = () => deleteTask(index);
 
+        // APPEND
         li.appendChild(span);
+        li.appendChild(upBtn);
+        li.appendChild(downBtn);
         li.appendChild(editBtn);
         li.appendChild(delBtn);
 
@@ -138,6 +189,16 @@ function showEditInput(li, index) {
     saveBtn.onclick = () => {
         const newText = input.value.trim();
         if (!newText) return;
+
+        // ❗ CEK DUPLIKAT SAAT EDIT
+        const isDuplicate = tasks.some((task, i) =>
+            i !== index && task.text.toLowerCase() === newText.toLowerCase()
+        );
+
+        if (isDuplicate) {
+            alert("Task sudah ada!");
+            return;
+        }
 
         tasks[index].text = newText;
         saveTasks();
