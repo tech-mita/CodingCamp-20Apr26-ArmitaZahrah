@@ -83,6 +83,20 @@ function deleteTask(index) {
     renderTasks();
 }
 
+function getEmoji(task) {
+    const text = task.toLowerCase();
+
+    if (text.includes("makan")) return "🍽️";
+    if (text.includes("tidur")) return "😴";
+    if (text.includes("belajar")) return "📚";
+    if (text.includes("kerja")) return "💻";
+    if (text.includes("olahraga")) return "🏃";
+    if (text.includes("ngopi")) return "☕";
+    if (text.includes("nonton")) return "🎬";
+
+    return "✨"; // default
+}
+
 function renderTasks() {
     const list = document.getElementById("taskList");
     list.innerHTML = "";
@@ -90,8 +104,11 @@ function renderTasks() {
     tasks.forEach((task, index) => {
         const li = document.createElement("li");
 
+        const emoji = getEmoji(task.text);
+
+        // TEXT
         const span = document.createElement("span");
-        span.innerText = task.text;
+        span.innerText = `${emoji} ${task.text}`;
 
         if (task.done) {
             span.style.textDecoration = "line-through";
@@ -99,17 +116,34 @@ function renderTasks() {
 
         span.onclick = () => toggleTask(index);
 
-        const btn = document.createElement("button");
-        btn.innerText = "❌";
-        btn.onclick = () => deleteTask(index);
+        // EDIT BUTTON
+        const editBtn = document.createElement("button");
+        editBtn.innerText = "✏️";
+        editBtn.onclick = () => editTask(index);
+
+        // DELETE BUTTON
+        const delBtn = document.createElement("button");
+        delBtn.innerText = "❌";
+        delBtn.onclick = () => deleteTask(index);
 
         li.appendChild(span);
-        li.appendChild(btn);
+        li.appendChild(editBtn);
+        li.appendChild(delBtn);
 
         list.appendChild(li);
     });
 }
 
+function editTask(index) {
+    const newText = prompt("Edit task:", tasks[index].text);
+
+    if (!newText) return;
+
+    tasks[index].text = newText;
+
+    saveTasks();
+    renderTasks();
+}
 
 // ===== TIMER (COUNTDOWN) =====
 let timer = 0;
@@ -218,4 +252,7 @@ function renderLinks() {
 document.addEventListener("DOMContentLoaded", function () {
     loadUserName(); // sekarang cuma reset, bukan load nama
     updateTime();
+    renderTasks();
+    renderLinks();
+    updateTimerDisplay();
 });
