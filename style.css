@@ -60,7 +60,6 @@ button {
     background: #ff6f91;
     color: white;
     cursor: pointer;
-    margin-top: 5px;
     transition: 0.3s;
 }
 
@@ -78,46 +77,6 @@ input {
     background: #fff;
 }
 
-/* ================= TOP LAYOUT ================= */
-.top-cards {
-    display: flex;
-    gap: 20px;
-}
-
-.top-cards .card {
-    flex: 1;
-    min-width: 0;
-    min-height: 220px;
-}
-
-/* ================= LABEL ================= */
-.label {
-    font-size: 14px;
-    color: #ff8fab;
-    margin-bottom: 4px;
-}
-
-/* ================= TIME ================= */
-#time, #timer {
-    font-size: 48px;
-    color: #d6336c;
-    text-shadow:
-        2px 2px 0 #fff,
-        0 0 8px rgba(255, 105, 135, 0.5);
-}
-
-/* ================= GREETING ================= */
-#greeting {
-    color: #ff6f91;
-}
-
-/* ================= TIMER BUTTON ================= */
-.timer-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
 /* ================= HEADER ================= */
 .header {
     text-align: center;
@@ -133,6 +92,26 @@ input {
 .subheading {
     font-size: 18px;
     color: #ff8eb3;
+}
+
+/* ================= TOP ================= */
+.top-cards {
+    display: flex;
+    gap: 20px;
+}
+
+.top-cards .card {
+    flex: 1;
+    min-height: 220px;
+}
+
+/* ================= TIME ================= */
+#time, #timer {
+    font-size: 48px;
+    color: #d6336c;
+    text-shadow:
+        2px 2px 0 #fff,
+        0 0 8px rgba(255, 105, 135, 0.5);
 }
 
 /* ================= TASK ================= */
@@ -154,9 +133,11 @@ input {
     margin-bottom: 12px;
 }
 
+/* 🔥 FIX EMOJI FONT */
 #taskList li span {
     flex: 1;
     text-align: left;
+    font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
 }
 
 .task-actions {
@@ -181,7 +162,6 @@ input {
 
 #linkList li {
     list-style: none;
-
     background: #ffe4ec;
     border-radius: 20px;
     padding: 15px;
@@ -211,7 +191,7 @@ input {
     border-radius: 50%;
 }
 
-/* ================= INPUT GROUP ================= */
+/* ================= INPUT ROW ================= */
 .task-input-row,
 .link-input-row {
     display: flex;
@@ -242,7 +222,7 @@ body.dark #taskList li {
 }
 
 body.dark #taskList li span {
-    color: white;
+    color: #f1f1f1; /* 🔥 FIX EMOJI */
 }
 
 /* LINKS */
