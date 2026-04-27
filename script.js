@@ -131,16 +131,8 @@ deleteBtn.onclick = () => deleteTask(index);
 li.appendChild(span);
 li.appendChild(editBtn);
 li.appendChild(deleteBtn);
-
-function editTask(index) {
-    const newText = prompt("Edit task:", tasks[index].text);
-
-    if (!newText) return;
-
-    tasks[index].text = newText;
-
-    saveTasks();
-    renderTasks();
+list.appendChild(li);
+});
 }
 
 // ===== TIMER (COUNTDOWN) =====
