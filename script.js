@@ -3,9 +3,15 @@ function saveName() {
     const input = document.getElementById("nameInput");
     const name = input.value.trim();
     if (!name) return;
+
     localStorage.setItem("username", name);
-    document.getElementById("helloText").innerText = `Hello, ${name}!`;
-    document.getElementById("subText").style.display = "block";
+
+    const hello = document.getElementById("helloText");
+    if (hello) hello.innerText = `Hello, ${name}!`;
+
+    const sub = document.getElementById("subText");
+    if (sub) sub.style.display = "block";
+
     input.value = "";
 }
 
@@ -13,19 +19,16 @@ function loadUserName() {
     const hello = document.getElementById("helloText");
     const sub = document.getElementById("subText");
 
-    // ❗ SELALU reset ke default
-    hello.innerText = "Hello, please input your name!";
-    sub.style.display = "none";
+    if (hello) hello.innerText = "Hello, please input your name!";
+    if (sub) sub.style.display = "none";
 }
 
-// ===== TIME & GREETING =====
+// ===== TIME =====
 function updateTime() {
     const now = new Date();
 
-    // JAM
     document.getElementById("time").innerText = now.toLocaleTimeString();
 
-    // GREETING + EMOJI
     let hour = now.getHours();
     let greeting = "";
 
@@ -35,19 +38,11 @@ function updateTime() {
 
     document.getElementById("greeting").innerText = greeting;
 
-    // TANGGAL
-    const options = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-    };
-
-    const dateString = now.toLocaleDateString('id-ID', options);
-    document.getElementById("date").innerText = dateString;
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById("date").innerText =
+        now.toLocaleDateString('id-ID', options);
 }
 
-// update tiap detik
 setInterval(updateTime, 1000);
 
 
@@ -61,7 +56,6 @@ function saveTasks() {
 function addTask() {
     const input = document.getElementById("taskInput");
     const text = input.value.trim();
-
     if (!text) return;
 
     tasks.push({ text, done: false });
@@ -83,8 +77,9 @@ function deleteTask(index) {
     renderTasks();
 }
 
-function getEmoji(task) {
-    const text = task.toLowerCase();
+// ===== EMOJI =====
+function getEmoji(text) {
+    text = text.toLowerCase();
 
     if (text.includes("makan")) return "🍽️";
     if (text.includes("masak")) return "🍳";
@@ -96,9 +91,10 @@ function getEmoji(task) {
     if (text.includes("ngopi")) return "☕";
     if (text.includes("nonton")) return "🎬";
 
-    return "✨"; // default
+    return "✨";
 }
 
+// ===== RENDER TASK =====
 function renderTasks() {
     const list = document.getElementById("taskList");
     list.innerHTML = "";
@@ -106,45 +102,68 @@ function renderTasks() {
     tasks.forEach((task, index) => {
         const li = document.createElement("li");
 
-        const emoji = getEmoji(task.text);
-
-        // TEXT
         const span = document.createElement("span");
-        span.innerText = `${emoji} ${task.text}`;
+        span.innerText = `${getEmoji(task.text)} ${task.text}`;
 
-        if (task.done) {
-            span.style.textDecoration = "line-through";
-        }
+        if (task.done) span.style.textDecoration = "line-through";
 
         span.onclick = () => toggleTask(index);
 
-        // EDIT BUTTON
-const editBtn = document.createElement("button");
-editBtn.innerText = "✏️";
-editBtn.onclick = () => showEditInput(li, index);
+        const editBtn = document.createElement("button");
+        editBtn.innerText = "✏️";
+        editBtn.onclick = () => showEditInput(li, index);
 
-const deleteBtn = document.createElement("button");
-deleteBtn.innerText = "❌";
-deleteBtn.onclick = () => deleteTask(index);
+        const delBtn = document.createElement("button");
+        delBtn.innerText = "❌";
+        delBtn.onclick = () => deleteTask(index);
 
-// append
-li.appendChild(span);
-li.appendChild(editBtn);
-li.appendChild(deleteBtn);
-list.appendChild(li);
-});
+        li.appendChild(span);
+        li.appendChild(editBtn);
+        li.appendChild(delBtn);
+
+        list.appendChild(li);
+    });
 }
 
-// ===== TIMER (COUNTDOWN) =====
+// ===== EDIT INLINE =====
+function showEditInput(li, index) {
+    li.innerHTML = "";
+
+    const input = document.createElement("input");
+    input.value = tasks[index].text;
+    input.className = "edit-input";
+
+    const saveBtn = document.createElement("button");
+    saveBtn.innerText = "💾";
+    saveBtn.onclick = () => {
+        const newText = input.value.trim();
+        if (!newText) return;
+
+        tasks[index].text = newText;
+        saveTasks();
+        renderTasks();
+    };
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.innerText = "❌";
+    cancelBtn.onclick = () => renderTasks();
+
+    li.appendChild(input);
+    li.appendChild(saveBtn);
+    li.appendChild(cancelBtn);
+}
+
+
+// ===== TIMER =====
 let timer = 0;
 let interval = null;
 
 function updateTimerDisplay() {
-    let minutes = Math.floor(timer / 60);
-    let seconds = timer % 60;
+    let m = Math.floor(timer / 60);
+    let s = timer % 60;
 
     document.getElementById("timer").innerText =
-        `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        `${m}:${s < 10 ? "0" : ""}${s}`;
 }
 
 function startTimer() {
@@ -240,7 +259,7 @@ function renderLinks() {
 
 // ===== INIT =====
 document.addEventListener("DOMContentLoaded", function () {
-    loadUserName(); // sekarang cuma reset, bukan load nama
+    loadUserName();
     updateTime();
     renderTasks();
     renderLinks();
