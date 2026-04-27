@@ -1,7 +1,6 @@
 // ===== USER NAME =====
 function saveName() {
     const input = document.getElementById("nameInput");
-    console.log("SAVE CLICKED");
     if (!input) return;
     const name = input.value.trim();
     if (name === "") return;
