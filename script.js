@@ -327,21 +327,25 @@ function renderLinks() {
 }
 
 // ===== DARK MODE =====
-const toggleBtn = document.getElementById("themeToggle");
-// load saved theme
 function loadTheme() {
     const saved = localStorage.getItem("theme");
+
     if (saved === "dark") {
         document.body.classList.add("dark");
-        toggleBtn.innerText = "☀️";
+        const btn = document.getElementById("themeToggle");
+        if (btn) btn.innerText = "☀️";
     }
 }
-// toggle
+
 function toggleTheme() {
     document.body.classList.toggle("dark");
+
     const isDark = document.body.classList.contains("dark");
     localStorage.setItem("theme", isDark ? "dark" : "light");
-    toggleBtn.innerText = isDark ? "☀️" : "🌙";
+
+    const btn = document.getElementById("themeToggle");
+    if (btn) btn.innerText = isDark ? "☀️" : "🌙";
+}
 }
 // event
 toggleBtn.addEventListener("click", toggleTheme);
@@ -354,4 +358,9 @@ document.addEventListener("DOMContentLoaded", function () {
     renderLinks();
     updateTimerDisplay();
     loadTheme();
+
+    const toggleBtn = document.getElementById("themeToggle");
+    if (toggleBtn) {
+        toggleBtn.addEventListener("click", toggleTheme);
+    }
 });
