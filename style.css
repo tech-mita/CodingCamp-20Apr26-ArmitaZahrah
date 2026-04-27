@@ -220,14 +220,13 @@ body {
 }
 
 .task-input-row {
+    display: flex;
+    gap: 10px;
     width: 100%;
-    box-sizing: border-box;
-    padding: 0 16px;
 }
 
 .task-input-row input {
     flex: 1;
-    width: 100%; /* 🔥 paksa full */
 }
 
 #date {
@@ -286,30 +285,27 @@ body.dark button {
 #taskList li {
     display: flex;
     align-items: center;
+
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 
     background: #ffe4ec;
     border-radius: 25px;
-    padding: 12px 16px;
+    padding: 12px;
     margin-bottom: 12px;
 
-    overflow: hidden;
+    gap: 10px; /* 🔥 penting */
 }
 
 #taskList li span {
     flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     text-align: left;
 }
 
 .task-actions {
     display: flex;
     gap: 6px;
-    margin-left: auto;
-    flex-shrink: 0;
 }
 
 .task-actions button {
