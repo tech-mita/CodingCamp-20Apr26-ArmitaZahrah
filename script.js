@@ -346,11 +346,6 @@ function toggleTheme() {
     const btn = document.getElementById("themeToggle");
     if (btn) btn.innerText = isDark ? "☀️" : "🌙";
 }
-// event
-const toggleBtn = document.getElementById("themeToggle");
-if (toggleBtn) {
-    toggleBtn.addEventListener("click", toggleTheme);
-}
 
 // ===== INIT =====
 document.addEventListener("DOMContentLoaded", function () {
