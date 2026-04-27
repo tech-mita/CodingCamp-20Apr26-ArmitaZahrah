@@ -69,11 +69,9 @@ function addTask() {
     // CEK DUPLIKAT
     const isDuplicate = tasks.some(t => normalize(t.text) === text);
     if (isDuplicate) {
-        alert("Task sudah ada, tidak bisa ditambahkan lagi!");
-        input.value = "";
+        alert("Task sudah ada, tidak bisa disimpan!");
         return;
     }
-
     tasks.push({ text: raw.trim(), done: false });
     input.value = "";
 
