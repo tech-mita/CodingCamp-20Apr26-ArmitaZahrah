@@ -80,17 +80,6 @@ ul {
     margin-top: 15px;
 }
 
-li {
-    list-style: none;
-    background: #ffe4ec;
-    padding: 10px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 /* link */
 #links a {
     display: inline-block;
