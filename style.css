@@ -179,10 +179,10 @@ input {
 }
 
 #linkList li a {
-    text-decoration: none;
-    color: #d63384;
-    font-weight: 500;
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
 .link-actions {
