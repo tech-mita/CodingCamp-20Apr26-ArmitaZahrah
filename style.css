@@ -287,10 +287,10 @@ body.dark button {
     align-items: center;
     width: 100%;
 
-    background: #ffe4ec;
-    border-radius: 25px;
-    padding: 12px 16px;
-    margin-bottom: 12px;
+    background: #ffe4ec;          /* 🔥 BALIKIN WARNA */
+    border-radius: 25px;          /* 🔥 BULAT */
+    padding: 12px 16px;           /* 🔥 JARAK DALAM */
+    margin-bottom: 12px;          /* 🔥 JARAK ANTAR TASK */
 
     overflow: hidden;
 }
