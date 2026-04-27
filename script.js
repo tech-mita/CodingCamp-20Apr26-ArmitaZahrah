@@ -9,6 +9,7 @@ function saveName() {
     if (hello) {
         hello.innerText = `Hello, ${name}!`;
     }
+    input.value = ""; 
 }
 
 function loadUserName() {
