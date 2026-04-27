@@ -270,11 +270,6 @@ function setCustomTime() {
     input.value = "";
 }
 
-// ===== INIT =====
-document.addEventListener("DOMContentLoaded", function () {
-    updateTimerDisplay();
-});
-
 // ===== LINKS =====
 let links = JSON.parse(localStorage.getItem("links")) || [];
 
@@ -355,9 +350,4 @@ document.addEventListener("DOMContentLoaded", function () {
     renderLinks();
     updateTimerDisplay();
     loadTheme();
-
-    const toggleBtn = document.getElementById("themeToggle");
-    if (toggleBtn) {
-        toggleBtn.addEventListener("click", toggleTheme);
-    }
 });
