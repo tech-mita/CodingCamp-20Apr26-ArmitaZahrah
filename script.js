@@ -49,29 +49,34 @@ setInterval(updateTime, 1000);
 // ===== TASK =====
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
+// ===== HELPERS =====
+function normalize(text) {
+    return text.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
 function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// ===== ADD TASK =====
+// ===== ADD =====
 function addTask() {
     const input = document.getElementById("taskInput");
-    const text = input.value.trim();
+    const raw = input.value;
 
+    const text = normalize(raw);
     if (!text) return;
 
-    // ❗ CEK DUPLIKAT
-    const isDuplicate = tasks.some(
-        task => task.text.toLowerCase() === text.toLowerCase()
-    );
+    // CEK DUPLIKAT
+    const isDuplicate = tasks.some(t => normalize(t.text) === text);
 
     if (isDuplicate) {
-        alert("Task sudah ada!");
+        input.style.border = "2px solid red";
+        setTimeout(() => input.style.border = "", 1000);
         input.value = "";
         return;
     }
 
-    tasks.push({ text: text, done: false });
+    tasks.push({ text: raw.trim(), done: false });
     input.value = "";
 
     saveTasks();
@@ -97,7 +102,6 @@ function moveTaskUp(index) {
     if (index === 0) return;
 
     [tasks[index - 1], tasks[index]] = [tasks[index], tasks[index - 1]];
-
     saveTasks();
     renderTasks();
 }
@@ -106,24 +110,23 @@ function moveTaskDown(index) {
     if (index === tasks.length - 1) return;
 
     [tasks[index + 1], tasks[index]] = [tasks[index], tasks[index + 1]];
-
     saveTasks();
     renderTasks();
 }
 
 // ===== EMOJI =====
 function getEmoji(text) {
-    text = text.toLowerCase();
+    const t = text.toLowerCase();
 
-    if (text.includes("makan")) return "🍽️";
-    if (text.includes("masak")) return "🍳";
-    if (text.includes("minum")) return "🍹";
-    if (text.includes("tidur")) return "😴";
-    if (text.includes("belajar")) return "📚";
-    if (text.includes("kerja")) return "💻";
-    if (text.includes("olahraga")) return "🏃";
-    if (text.includes("ngopi")) return "☕";
-    if (text.includes("nonton")) return "🎬";
+    if (t.includes("makan")) return "🍽️";
+    if (t.includes("masak")) return "🍳";
+    if (t.includes("minum")) return "🍹";
+    if (t.includes("tidur")) return "😴";
+    if (t.includes("belajar")) return "📚";
+    if (t.includes("kerja")) return "💻";
+    if (t.includes("olahraga")) return "🏃";
+    if (t.includes("ngopi")) return "☕";
+    if (t.includes("nonton")) return "🎬";
 
     return "✨";
 }
@@ -140,13 +143,11 @@ function renderTasks() {
         const span = document.createElement("span");
         span.innerText = `${getEmoji(task.text)} ${task.text}`;
 
-        if (task.done) {
-            span.style.textDecoration = "line-through";
-        }
+        if (task.done) span.style.textDecoration = "line-through";
 
         span.onclick = () => toggleTask(index);
 
-        // MOVE BUTTONS
+        // MOVE
         const upBtn = document.createElement("button");
         upBtn.innerText = "⬆️";
         upBtn.onclick = () => moveTaskUp(index);
@@ -155,17 +156,16 @@ function renderTasks() {
         downBtn.innerText = "⬇️";
         downBtn.onclick = () => moveTaskDown(index);
 
-        // EDIT BUTTON
+        // EDIT
         const editBtn = document.createElement("button");
         editBtn.innerText = "✏️";
         editBtn.onclick = () => showEditInput(li, index);
 
-        // DELETE BUTTON
+        // DELETE
         const delBtn = document.createElement("button");
         delBtn.innerText = "❌";
         delBtn.onclick = () => deleteTask(index);
 
-        // APPEND
         li.appendChild(span);
         li.appendChild(upBtn);
         li.appendChild(downBtn);
@@ -186,21 +186,24 @@ function showEditInput(li, index) {
 
     const saveBtn = document.createElement("button");
     saveBtn.innerText = "💾";
+
     saveBtn.onclick = () => {
-        const newText = input.value.trim();
+        const raw = input.value;
+        const newText = normalize(raw);
+
         if (!newText) return;
 
         // ❗ CEK DUPLIKAT SAAT EDIT
-        const isDuplicate = tasks.some((task, i) =>
-            i !== index && task.text.toLowerCase() === newText.toLowerCase()
+        const isDuplicate = tasks.some((t, i) =>
+            i !== index && normalize(t.text) === newText
         );
 
         if (isDuplicate) {
-            alert("Task sudah ada!");
+            input.style.border = "2px solid red";
             return;
         }
 
-        tasks[index].text = newText;
+        tasks[index].text = raw.trim();
         saveTasks();
         renderTasks();
     };
@@ -213,8 +216,7 @@ function showEditInput(li, index) {
     li.appendChild(saveBtn);
     li.appendChild(cancelBtn);
 }
-
-
+renderTasks();
 // ===== TIMER =====
 let DEFAULT_TIME = 25 * 60; 
 let timer = DEFAULT_TIME;
