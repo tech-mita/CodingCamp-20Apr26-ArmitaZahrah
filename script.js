@@ -58,7 +58,6 @@ function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// ===== ADD TASK =====
 function addTask() {
     const input = document.getElementById("taskInput");
     const raw = input.value;
@@ -80,56 +79,45 @@ function addTask() {
     renderTasks();
 }
 
-// ===== TOGGLE DONE =====
 function toggleTask(index) {
     tasks[index].done = !tasks[index].done;
     saveTasks();
     renderTasks();
 }
 
-// ===== DELETE =====
 function deleteTask(index) {
     tasks.splice(index, 1);
     saveTasks();
     renderTasks();
 }
 
-// ===== MOVE =====
 function moveTaskUp(index) {
     if (index === 0) return;
-
     [tasks[index - 1], tasks[index]] =
         [tasks[index], tasks[index - 1]];
-
     saveTasks();
     renderTasks();
 }
 
 function moveTaskDown(index) {
     if (index === tasks.length - 1) return;
-
     [tasks[index + 1], tasks[index]] =
         [tasks[index], tasks[index + 1]];
-
     saveTasks();
     renderTasks();
 }
 
-// ===== EMOJI =====
 function getEmoji(text) {
     const t = text.toLowerCase();
-
     if (t.includes("makan")) return "🍽️";
     if (t.includes("minum")) return "🍹";
     if (t.includes("tidur")) return "😴";
     if (t.includes("belajar")) return "📚";
     if (t.includes("kerja")) return "💻";
     if (t.includes("olahraga")) return "🏃";
-
     return "✨";
 }
 
-// ===== RENDER =====
 function renderTasks() {
     const list = document.getElementById("taskList");
     list.innerHTML = "";
@@ -137,7 +125,6 @@ function renderTasks() {
     tasks.forEach((task, index) => {
         const li = document.createElement("li");
 
-        // TEXT
         const span = document.createElement("span");
         span.innerText = `${getEmoji(task.text)} ${task.text}`;
 
@@ -146,11 +133,9 @@ function renderTasks() {
 
         span.onclick = () => toggleTask(index);
 
-        // BUTTON WRAPPER
         const actions = document.createElement("div");
         actions.className = "task-actions";
 
-        // BUTTONS
         const up = document.createElement("button");
         up.innerText = "⬆️";
         up.onclick = () => moveTaskUp(index);
@@ -168,13 +153,11 @@ function renderTasks() {
         del.onclick = () => deleteTask(index);
 
         actions.append(up, down, edit, del);
-
         li.append(span, actions);
         list.appendChild(li);
     });
 }
 
-// ===== EDIT =====
 function showEditInput(li, index) {
     li.innerHTML = "";
 
@@ -234,6 +217,7 @@ function startTimer() {
         } else {
             clearInterval(interval);
             interval = null;
+            alert("Waktu fokus selesai!");
         }
     }, 1000);
 }
@@ -246,24 +230,36 @@ function stopTimer() {
 function resetTimer() {
     clearInterval(interval);
     interval = null;
-
     timer = DEFAULT_TIME;
     updateTimerDisplay();
 }
 
 function setCustomTime() {
     const input = document.getElementById("customTime");
-    const minutes = parseInt(input.value);
+    const value = input.value.trim();
 
-    if (!minutes || minutes <= 0) return;
+    if (!value) return;
+
+    const minutes = parseInt(value);
+
+    if (isNaN(minutes)) {
+        alert("Masukkan angka yang valid!");
+        input.value = "";
+        return;
+    }
+
+    if (minutes <= 0) {
+        alert("Waktu fokus hanya angka positif!");
+        input.value = "";
+        return;
+    }
 
     timer = minutes * 60;
     updateTimerDisplay();
-
     input.value = "";
 }
 
-// ===== LINKS =====
+// ===== LINKS (UPDATED) =====
 let links = JSON.parse(localStorage.getItem("links")) || [];
 
 function saveLinks() {
@@ -297,18 +293,61 @@ function renderLinks() {
     links.forEach((link, index) => {
         const li = document.createElement("li");
 
+        const span = document.createElement("span");
+
         const a = document.createElement("a");
         a.href = link.url;
-        a.innerText = "💖 " + link.name;
+        a.innerText = "🔗 " + link.name;
         a.target = "_blank";
 
-        const btn = document.createElement("button");
-        btn.innerText = "❌";
-        btn.onclick = () => deleteLink(index);
+        span.appendChild(a);
 
-        li.append(a, btn);
+        const actions = document.createElement("div");
+        actions.className = "link-actions";
+
+        const edit = document.createElement("button");
+        edit.innerText = "✏️";
+        edit.onclick = () => showEditLink(li, index);
+
+        const del = document.createElement("button");
+        del.innerText = "❌";
+        del.onclick = () => deleteLink(index);
+
+        actions.append(edit, del);
+
+        li.append(span, actions);
         container.appendChild(li);
     });
+}
+
+function showEditLink(li, index) {
+    li.innerHTML = "";
+
+    const nameInput = document.createElement("input");
+    nameInput.value = links[index].name;
+
+    const urlInput = document.createElement("input");
+    urlInput.value = links[index].url;
+
+    const save = document.createElement("button");
+    save.innerText = "💾";
+
+    save.onclick = () => {
+        const name = nameInput.value.trim();
+        const url = urlInput.value.trim();
+
+        if (!name || !url) return;
+
+        links[index] = { name, url };
+        saveLinks();
+        renderLinks();
+    };
+
+    const cancel = document.createElement("button");
+    cancel.innerText = "❌";
+    cancel.onclick = () => renderLinks();
+
+    li.append(nameInput, urlInput, save, cancel);
 }
 
 // ===== DARK MODE =====
