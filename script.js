@@ -4,21 +4,16 @@ function saveName() {
     const name = input.value.trim();
     if (!name) return;
     localStorage.setItem("username", name);
-
-    // update hello
     document.getElementById("helloText").innerText = `Hello, ${name}!`;
-    // munculkan subheading
     document.getElementById("subText").style.display = "block";
-    // reset input
     input.value = "";
 }
 
 function loadUserName() {
     const hello = document.getElementById("helloText");
     const sub = document.getElementById("subText");
-    if (!hello || !sub) return;
-    
-    // ❗ SELALU RESET KE DEFAULT
+
+    // ❗ SELALU reset ke default
     hello.innerText = "Hello, please input your name!";
     sub.style.display = "none";
 }
@@ -221,9 +216,6 @@ function renderLinks() {
 
 // ===== INIT =====
 document.addEventListener("DOMContentLoaded", function () {
-    loadUserName();
+    loadUserName(); // sekarang cuma reset, bukan load nama
     updateTime();
-    renderTasks();
-    renderLinks();
-    updateTimerDisplay();
 });
