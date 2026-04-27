@@ -265,20 +265,22 @@ body {
     margin-top: 6px;
 }
 
-.dark {
-    background: #1e1e2f;
-    color: white;
+/* 🔥 FINAL TOUCH DARK MODE */
+
+body.dark #time,
+body.dark #timer {
+    color: #ff8fab; /* pink soft, bukan neon */
+    text-shadow: none; /* biar ga silau */
 }
 
-.dark .card {
-    background: #2a2a40;
+body.dark .label {
+    color: #bbb;
 }
 
-.dark input {
-    background: #3a3a55;
-    color: white;
+body.dark #greeting {
+    color: #ff8fab;
 }
 
-.dark button {
-    background: #ff6f9f;
+body.dark #helloText {
+    color: #ff8fab;
 }
