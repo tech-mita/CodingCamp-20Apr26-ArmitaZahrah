@@ -337,6 +337,17 @@ function toggleTheme() {
     if (btn) btn.innerText = isDark ? "☀️" : "🌙";
 }
 
+const actions = document.createElement("div");
+actions.className = "task-actions";
+
+actions.appendChild(upBtn);
+actions.appendChild(downBtn);
+actions.appendChild(editBtn);
+actions.appendChild(delBtn);
+
+li.appendChild(span);
+li.appendChild(actions);
+
 // ===== INIT =====
 document.addEventListener("DOMContentLoaded", function () {
     // semua init di sini
@@ -351,3 +362,4 @@ document.addEventListener("DOMContentLoaded", function () {
     const btn = document.getElementById("themeToggle");
     if (btn) btn.addEventListener("click", toggleTheme);
 });
+
