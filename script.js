@@ -264,12 +264,9 @@ function resetTimer() {
 function setCustomTime() {
     const input = document.getElementById("customTime");
     const minutes = parseInt(input.value);
-
     if (!minutes || minutes <= 0) return;
-
     timer = minutes * 60;
     updateTimerDisplay();
-
     input.value = "";
 }
 
@@ -329,6 +326,25 @@ function renderLinks() {
     });
 }
 
+// ===== DARK MODE =====
+const toggleBtn = document.getElementById("themeToggle");
+// load saved theme
+function loadTheme() {
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark") {
+        document.body.classList.add("dark");
+        toggleBtn.innerText = "☀️";
+    }
+}
+// toggle
+function toggleTheme() {
+    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    toggleBtn.innerText = isDark ? "☀️" : "🌙";
+}
+// event
+toggleBtn.addEventListener("click", toggleTheme);
 
 // ===== INIT =====
 document.addEventListener("DOMContentLoaded", function () {
@@ -337,4 +353,5 @@ document.addEventListener("DOMContentLoaded", function () {
     renderTasks();
     renderLinks();
     updateTimerDisplay();
+    loadTheme();
 });
